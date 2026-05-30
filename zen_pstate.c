@@ -52,7 +52,6 @@ static int zen_pstate_target(struct cpufreq_policy *policy,
   req |= FIELD_PREP(AMD_CPPC_MAX_PERF_MASK, data->max_perf);
   req |= FIELD_PREP(AMD_CPPC_DES_PERF_MASK, perf_level);
   req |= FIELD_PREP(AMD_CPPC_EPP_PERF_MASK, 0x80);
-  pr_info("Writing 0x%llx to %d", req, MSR_AMD_CPPC_REQ);
   wrmsrl(MSR_AMD_CPPC_REQ, req);
   return 0;
 }

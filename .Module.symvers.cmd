@@ -1,1 +1,0 @@
-savedcmd_Module.symvers :=  /usr/lib/modules/7.0.10-273-tkg-linux70/build/scripts/mod/modpost -M    -a    -N  -o Module.symvers -n -T modules.order -i /usr/lib/modules/7.0.10-273-tkg-linux70/build/Module.symvers -e 

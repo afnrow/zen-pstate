@@ -1,1 +1,0 @@
-savedcmd_zen_pstate.ko := ld.lld -r -m elf_x86_64 -mllvm -import-instr-limit=5 -z noexecstack --build-id=sha1  -T /usr/lib/modules/7.0.10-273-tkg-linux70/build/scripts/module.lds -o zen_pstate.ko zen_pstate.o zen_pstate.mod.o .module-common.o

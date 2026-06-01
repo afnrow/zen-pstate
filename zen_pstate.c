@@ -6,11 +6,6 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 
-// #ifndef rdmsrl_safe_on_cpu // some kernels have a version with q
-// #define rdmsrl_safe_on_cpu(cpu, reg, val) rdmsrq_safe_on_cpu(cpu, reg, val)
-// #define wrmsrl_safe_on_cpu(cpu, reg, val) wrmsrq_safe_on_cpu(cpu, reg, val)
-// #endif
-
 struct zen_pstate_data {
   u8 min_perf;
   u8 max_perf;
@@ -78,21 +73,17 @@ static unsigned int zen_pstate_fast_switch(struct cpufreq_policy *policy,
 }
 
 static inline int enable_cppc(void) {
-  // if (!boot_cpu_has(X86_FEATURE_CPPC)) {
-  //   pr_err("CPPC not supported on this CPU.\n");
-  //   return -ENODEV;
-  // }
   u64 val;
   rdmsrl(MSR_AMD_CPPC_ENABLE, val);
   if (val & 1) {
-    pr_info("CPPC already enabled by BIOS.\n");
+    pr_info("CPPC already enabled by BIOS\n");
     return 0;
   }
-  pr_info("Attempting to force-enable CPPC...\n");
+  pr_info("Attempting to force-enable CPPC... \n");
   wrmsrl(MSR_AMD_CPPC_ENABLE, 1);
   rdmsrl(MSR_AMD_CPPC_ENABLE, val);
   if (!(val & 1)) {
-    pr_err("Force-enable failed. Hardware gate is hard-locked.\n");
+    pr_err("Forcing CPPC failed. Hardware gate is locked\n");
     return -EPERM;
   }
   return 0;

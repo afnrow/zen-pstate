@@ -7,7 +7,7 @@ you can install with make like this
 ```
 or if you compiled the kernel with clang use
 ```
-make LLVM=1 LLVM_IAS=1
+make LLVM=1
 ```
 # Contributing
 contributions are very welcome but make sure that you compile and test them first
